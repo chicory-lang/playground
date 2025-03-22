@@ -24,8 +24,8 @@ const Component = () => {
   // const u = Guest
 
   const welcomeText = match(u) {
-    LoggedIn("Luke") => "Welcome, Mr Skywalker",
-    LoggedIn(p) => "Hi " + p,
+    LoggedIn("Luke") => "Welcome, Mr Skywalker"
+    // LoggedIn(p) => "Hi " + p
     Guest => "Welcome New User!"
   }
 
