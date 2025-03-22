@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CodeEditor from './components/CodeEditor';
 import ResultsDisplay from './components/ResultsDisplay';
 import compile from "@chicory-lang/compiler";
@@ -40,10 +40,7 @@ function App() {
   const [chicoryCode, setChicoryCode] = useState(DEFAULT_CODE);
   const [compileResult, setCompileResult] = useState<CompileResult>({ code: '', errors: [], hints: [] });
 
-  useEffect(() => {
-    // Compile the initial code
-    handleCompile(DEFAULT_CODE);
-  }, []);
+  const onReady = () => handleCompile(DEFAULT_CODE)
 
   const handleCodeChange = (newCode: string) => {
     setChicoryCode(newCode);
@@ -76,6 +73,7 @@ function App() {
         onCodeChange={handleCodeChange}
         errors={compileResult.errors}
         hints={compileResult.hints}
+        onReady={onReady}
       />
       <ResultsDisplay
         compiledCode={compileResult.code}

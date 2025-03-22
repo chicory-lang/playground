@@ -15,9 +15,10 @@ interface CodeEditorProps {
   onCodeChange: (code: string) => void;
   errors?: LspDiagnostic[];
   hints?: TypeHint[];
+  onReady?: () => void;
 }
 
-function CodeEditor({ initialCode, onCodeChange, errors = [], hints = [] }: CodeEditorProps) {
+function CodeEditor({ onReady, initialCode, onCodeChange, errors = [], hints = [] }: CodeEditorProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<typeof import('monaco-editor') | null>(null);
 
@@ -75,6 +76,11 @@ function CodeEditor({ initialCode, onCodeChange, errors = [], hints = [] }: Code
       await wireTmGrammars(monaco, registry, grammars);
     } catch (error) {
       console.error('Error setting up Chicory language:', error);
+    }
+    finally {
+      if (typeof onReady === 'function') {
+        onReady();
+      }
     }
   };
 
