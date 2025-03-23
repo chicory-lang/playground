@@ -25,7 +25,7 @@ const Component = () => {
 
   const welcomeText = match(u) {
     LoggedIn("Luke") => "Welcome, Mr Skywalker"
-    // LoggedIn(p) => "Hi " + p
+    // LoggedIn(name) => "Hi " + name
     Guest => "Welcome New User!"
   }
 
